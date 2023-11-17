@@ -118,16 +118,16 @@ function onCommand(name, tab) {
         if (!specifiedTab) return;
 
         chrome.tabs.update(specifiedTab.id, { active: true });
+        exitFullscreen(window);
       });
-      exitFullscreen(window);
       break;
 
     case "CTRL_9":
       getRecent(({ tabs }) => {
         let lastTab = tabs[tabs.length - 1];
         chrome.tabs.update(lastTab.id, { active: true });
+        exitFullscreen(window);
       });
-      exitFullscreen(window);
       break;
   }
 }
