@@ -35,7 +35,7 @@ function onCommand(name, tab) {
       break;
 
     case "EXIT_FULL_SCREEN":
-      chrome.windows.update(window.id, { state: chrome.windows.WindowState.MAXIMIZED })
+      chrome.windows.update(window.id, { state: chrome.windows.WindowState.NORMAL})
       break;
 
     case "VIEW_SOURCE":
@@ -118,7 +118,7 @@ function onCommand(name, tab) {
         if (!specifiedTab) return;
 
         chrome.tabs.update(specifiedTab.id, { active: true });
-        chrome.windows.update(window.id, { state: chrome.windows.WindowState.MAXIMIZED })
+        chrome.windows.update(window.id, { state: chrome.windows.WindowState.NORMAL })
       });
       break;
 
@@ -126,7 +126,7 @@ function onCommand(name, tab) {
       getRecent(({ tabs }) => {
         let lastTab = tabs[tabs.length - 1];
         chrome.tabs.update(lastTab.id, { active: true });
-        chrome.windows.update(window.id, { state: chrome.windows.WindowState.MAXIMIZED })
+        chrome.windows.update(window.id, { state: chrome.windows.WindowState.NORMAL })
       });
       break;
   }
