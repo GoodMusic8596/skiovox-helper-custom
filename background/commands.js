@@ -35,7 +35,7 @@ function onCommand(name, tab) {
       break;
 
     case "EXIT_FULL_SCREEN":
-      exitFullscreen(window);
+      chrome.windows.update(window.id, { state: chrome.windows.WindowState.MAXIMIZED })
       break;
 
     case "VIEW_SOURCE":
@@ -46,19 +46,19 @@ function onCommand(name, tab) {
 
         chrome.tabs.create({ windowId: window?.id, url: VIEW_SOURCE_PREFIX + currentTab.url });
       });
-      exitFullscreen(window);
+      chrome.windows.update(window.id, { state: chrome.windows.WindowState.MAXIMIZED })
       break;
 
     case "CLOSE_TAB":
       if (tab && tab.id !== chrome.tabs.TAB_ID_NONE) {
         chrome.tabs.remove(tab.id);
       }
-      exitFullscreen(window);
+      chrome.windows.update(window.id, { state: chrome.windows.WindowState.MAXIMIZED })
       break;
 
     case "RESTORE_TAB":
       chrome.sessions.restore();
-      exitFullscreen(window);
+      chrome.windows.update(window.id, { state: chrome.windows.WindowState.MAXIMIZED })
       break;
 
     case "NEW_WINDOW":
@@ -79,12 +79,12 @@ function onCommand(name, tab) {
 
     case "ACCESS_HISTORY":
       chrome.tabs.create({ windowId: window?.id, url: HISTORY_URL });
-      exitFullscreen(window);
+      chrome.windows.update(window.id, { state: chrome.windows.WindowState.MAXIMIZED })
       break;
 
     case "ACCESS_DOWNLOADS":
       chrome.tabs.create({ windowId: window?.id, url: DOWNLOADS_URL });
-      exitFullscreen(window);
+      chrome.windows.update(window.id, { state: chrome.windows.WindowState.MAXIMIZED })
       break;
 
     case "TAB_NEXT":
@@ -118,7 +118,7 @@ function onCommand(name, tab) {
         if (!specifiedTab) return;
 
         chrome.tabs.update(specifiedTab.id, { active: true });
-        exitFullscreen(window);
+        chrome.windows.update(window.id, { state: chrome.windows.WindowState.MAXIMIZED })
       });
       break;
 
@@ -126,7 +126,7 @@ function onCommand(name, tab) {
       getRecent(({ tabs }) => {
         let lastTab = tabs[tabs.length - 1];
         chrome.tabs.update(lastTab.id, { active: true });
-        exitFullscreen(window);
+        chrome.windows.update(window.id, { state: chrome.windows.WindowState.MAXIMIZED })
       });
       break;
   }
